@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install next-sanity @sanity/client @sanity/image-url @sanity/vision @sanity/icons)",
+      "Bash(npm install next-sanity@9 @sanity/client@6 @sanity/image-url@3 @sanity/vision@3 @sanity/icons@2)",
+      "Bash(npm install next-sanity@9 @sanity/client@6 @sanity/vision@3 --legacy-peer-deps)",
+      "Bash(npm install --save-dev sanity --legacy-peer-deps)",
+      "Bash(npm run build 2>&1 | head -100)",
+      "Bash(npm run build 2>&1 | head -150)",
+      "Bash(npm run build 2>&1)",
+      "Bash(rm -rf /Users/test/Desktop/personal_web/.next && npm run build 2>&1)",
+      "Bash(sleep 5 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(sleep 5 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000 2>/dev/null || echo \"Server not ready\")",
+      "Bash(curl -s http://localhost:3000 | grep -o \"中文\\\\|EN\" | head -5)",
+      "Bash(curl -s http://localhost:3000/awards | grep -o \"技能\\\\|Skills\" | head -3)",
+      "Bash(pkill -f \"next dev\" 2>/dev/null; echo \"Dev server stopped\")",
+      "Bash(sleep 4 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(sleep 3 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(sleep 5 && curl -s http://localhost:3000 | head -20)",
+      "Bash(sleep 8 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(sleep 10 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(sleep 8 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3333)",
+      "Bash(pkill -f \"next dev\" 2>/dev/null; sleep 2)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/studio)",
+      "Bash(curl -s http://localhost:3000/studio | head -50)",
+      "Bash(npm ls react sanity 2>&1 | head -20)",
+      "Bash(npm install react@19 react-dom@19 --save 2>&1)",
+      "Bash(npm install 2>&1)",
+      "Bash(sleep 10 && curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3333)"
+    ]
+  }
+}

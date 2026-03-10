@@ -1,0 +1,27 @@
+{
+  "name": "personal-website-studio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity deploy-graphql"
+  },
+  "dependencies": {
+    "@sanity/icons": "^3.0.0",
+    "@sanity/ui": "^2.0.0",
+    "@sanity/vision": "^3.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.50.0",
+    "styled-components": "^6.0.0"
+  },
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^3.0.1",
+    "@types/react": "^18",
+    "@types/styled-components": "^5.1.26",
+    "typescript": "^5.0.0"
+  }
+}
