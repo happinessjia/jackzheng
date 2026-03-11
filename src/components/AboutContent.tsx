@@ -2,13 +2,14 @@
 
 import { useLanguage } from '@/contexts/LanguageContext'
 import { urlFor } from '@/sanity/lib/client'
+import { getLocalizedField } from '@/lib/i18n-content'
 
 interface AboutContentProps {
   about: any
 }
 
 export default function AboutContent({ about }: AboutContentProps) {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   if (!about) {
     return (
@@ -18,6 +19,11 @@ export default function AboutContent({ about }: AboutContentProps) {
       </div>
     )
   }
+
+  const name = getLocalizedField(about, 'name', language)
+  const title = getLocalizedField(about, 'title', language)
+  const location = getLocalizedField(about, 'location', language)
+  const bio = language === 'zh' ? about.bio_zh : about.bio_en
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -29,7 +35,7 @@ export default function AboutContent({ about }: AboutContentProps) {
             <div className="flex-shrink-0">
               <img
                 src={urlFor(about.avatar).width(200).height(200).url()}
-                alt={about.name}
+                alt={name || 'Name'}
                 className="w-48 h-48 rounded-full object-cover mx-auto md:mx-0"
               />
             </div>
@@ -37,15 +43,15 @@ export default function AboutContent({ about }: AboutContentProps) {
 
           <div className="flex-1">
             <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-              {about.name || 'Name'}
+              {name || 'Name'}
             </h2>
             <p className="text-lg text-gray-600 mb-4">
-              {about.title || 'Title'}
+              {title || 'Title'}
             </p>
 
-            {about.location && (
+            {location && (
               <p className="text-gray-500 mb-4">
-                <span className="font-medium">{t('about.location')}:</span> {about.location}
+                <span className="font-medium">{t('about.location')}:</span> {location}
               </p>
             )}
 
@@ -60,11 +66,11 @@ export default function AboutContent({ about }: AboutContentProps) {
           </div>
         </div>
 
-        {about.bio && (
+        {bio && (
           <div className="mt-8">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('about.biography')}</h3>
             <div className="prose max-w-none text-gray-700">
-              {about.bio.map((block: any, i: number) => (
+              {bio.map((block: any, i: number) => (
                 <p key={i} className="mb-4">
                   {block.children?.map((child: any) => child.text).join('')}
                 </p>

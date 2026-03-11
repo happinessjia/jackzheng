@@ -1,20 +1,13 @@
 import { defineField, defineType } from 'sanity'
+import { localizedString, localizedText } from './localizedTypes'
 
 export default defineType({
   name: 'education',
   title: 'Education',
   type: 'document',
   fields: [
-    defineField({
-      name: 'school',
-      title: 'School',
-      type: 'string',
-    }),
-    defineField({
-      name: 'degree',
-      title: 'Degree',
-      type: 'string',
-    }),
+    ...localizedString({ name: 'school', title: 'School' }),
+    ...localizedString({ name: 'degree', title: 'Degree' }),
     defineField({
       name: 'field',
       title: 'Field of Study',
@@ -30,10 +23,6 @@ export default defineType({
       title: 'End Date',
       type: 'string',
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
+    ...localizedText({ name: 'description', title: 'Description' }),
   ],
 })

@@ -1,20 +1,13 @@
 import { defineField, defineType } from 'sanity'
+import { localizedString, localizedText } from './localizedTypes'
 
 export default defineType({
   name: 'project',
   title: 'Projects',
   type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
+    ...localizedString({ name: 'title', title: 'Title' }),
+    ...localizedText({ name: 'description', title: 'Description' }),
     defineField({
       name: 'image',
       title: 'Cover Image',

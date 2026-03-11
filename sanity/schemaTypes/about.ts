@@ -1,20 +1,13 @@
 import { defineField, defineType } from 'sanity'
+import { localizedString, localizedRichText } from './localizedTypes'
 
 export default defineType({
   name: 'about',
   title: 'About Me',
   type: 'document',
   fields: [
-    defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
-    }),
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
+    ...localizedString({ name: 'name', title: 'Name' }),
+    ...localizedString({ name: 'title', title: 'Title' }),
     defineField({
       name: 'avatar',
       title: 'Avatar',
@@ -23,22 +16,13 @@ export default defineType({
         hotspot: true,
       },
     }),
-    defineField({
-      name: 'bio',
-      title: 'Biography',
-      type: 'array',
-      of: [{ type: 'block' }],
-    }),
+    ...localizedRichText({ name: 'bio', title: 'Biography' }),
     defineField({
       name: 'email',
       title: 'Email',
       type: 'string',
     }),
-    defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'string',
-    }),
+    ...localizedString({ name: 'location', title: 'Location' }),
     defineField({
       name: 'socialLinks',
       title: 'Social Links',

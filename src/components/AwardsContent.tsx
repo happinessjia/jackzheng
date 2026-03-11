@@ -1,6 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
+import { getLocalizedField } from '@/lib/i18n-content'
 
 interface AwardsContentProps {
   awards: any[]
@@ -27,27 +28,33 @@ export default function AwardsContent({ awards }: AwardsContentProps) {
         <p className="text-gray-600">{t('awards.noAwards')}</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {awards.map((award: any) => (
-            <div
-              key={award._id}
-              className="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-400"
-            >
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {award.title}
-              </h3>
-              <p className="text-yellow-600 font-medium mb-2">
-                {award.issuer}
-              </p>
-              {award.date && (
-                <p className="text-gray-500 text-sm mb-3">
-                  {formatDate(award.date)}
+          {awards.map((award: any) => {
+            const title = getLocalizedField(award, 'title', language)
+            const issuer = getLocalizedField(award, 'issuer', language)
+            const description = getLocalizedField(award, 'description', language)
+
+            return (
+              <div
+                key={award._id}
+                className="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-400"
+              >
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {title}
+                </h3>
+                <p className="text-yellow-600 font-medium mb-2">
+                  {issuer}
                 </p>
-              )}
-              {award.description && (
-                <p className="text-gray-700">{award.description}</p>
-              )}
-            </div>
-          ))}
+                {award.date && (
+                  <p className="text-gray-500 text-sm mb-3">
+                    {formatDate(award.date)}
+                  </p>
+                )}
+                {description && (
+                  <p className="text-gray-700">{description}</p>
+                )}
+              </div>
+            )
+          })}
         </div>
       )}
     </div>

@@ -1,15 +1,12 @@
 import { defineField, defineType } from 'sanity'
+import { localizedString, localizedText } from './localizedTypes'
 
 export default defineType({
   name: 'showMe',
   title: 'Show Me',
   type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
+    ...localizedString({ name: 'title', title: 'Title' }),
     defineField({
       name: 'mediaType',
       title: 'Media Type',
@@ -35,11 +32,7 @@ export default defineType({
       type: 'url',
       description: 'URL to video file or embed URL',
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
+    ...localizedText({ name: 'description', title: 'Description' }),
     defineField({
       name: 'order',
       title: 'Display Order',

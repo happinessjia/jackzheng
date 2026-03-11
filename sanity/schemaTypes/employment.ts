@@ -1,20 +1,13 @@
 import { defineField, defineType } from 'sanity'
+import { localizedString, localizedText } from './localizedTypes'
 
 export default defineType({
   name: 'employment',
   title: 'Employment',
   type: 'document',
   fields: [
-    defineField({
-      name: 'company',
-      title: 'Company',
-      type: 'string',
-    }),
-    defineField({
-      name: 'position',
-      title: 'Position',
-      type: 'string',
-    }),
+    ...localizedString({ name: 'company', title: 'Company' }),
+    ...localizedString({ name: 'position', title: 'Position' }),
     defineField({
       name: 'startDate',
       title: 'Start Date',
@@ -26,15 +19,7 @@ export default defineType({
       type: 'string',
       description: 'Leave empty if current position',
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
-    defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'string',
-    }),
+    ...localizedText({ name: 'description', title: 'Description' }),
+    ...localizedString({ name: 'location', title: 'Location' }),
   ],
 })

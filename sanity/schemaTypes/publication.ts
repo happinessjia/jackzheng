@@ -1,25 +1,14 @@
 import { defineField, defineType } from 'sanity'
+import { localizedString, localizedText } from './localizedTypes'
 
 export default defineType({
   name: 'publication',
   title: 'Publications',
   type: 'document',
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
-    defineField({
-      name: 'authors',
-      title: 'Authors',
-      type: 'string',
-    }),
-    defineField({
-      name: 'journal',
-      title: 'Journal/Conference',
-      type: 'string',
-    }),
+    ...localizedString({ name: 'title', title: 'Title' }),
+    ...localizedString({ name: 'authors', title: 'Authors' }),
+    ...localizedString({ name: 'journal', title: 'Journal/Conference' }),
     defineField({
       name: 'year',
       title: 'Year',
@@ -30,10 +19,6 @@ export default defineType({
       title: 'Link',
       type: 'url',
     }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-    }),
+    ...localizedText({ name: 'description', title: 'Description' }),
   ],
 })

@@ -1,6 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
+import { getLocalizedField } from '@/lib/i18n-content'
 
 interface ExperienceContentProps {
   employment: any[]
@@ -32,26 +33,33 @@ export default function ExperienceContent({ employment, education }: ExperienceC
           <p className="text-gray-600">{t('experience.noEmployment')}</p>
         ) : (
           <div className="relative border-l-2 border-gray-200 ml-4 space-y-8">
-            {employment.map((job: any) => (
-              <div key={job._id} className="relative pl-8">
-                <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full border-2 border-white" />
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {job.position}
-                  </h3>
-                  <p className="text-blue-600 font-medium mb-2">{job.company}</p>
-                  <p className="text-gray-500 text-sm mb-3">
-                    {formatDate(job.startDate, job.endDate)}
-                  </p>
-                  {job.location && (
-                    <p className="text-gray-500 text-sm mb-3">{job.location}</p>
-                  )}
-                  {job.description && (
-                    <p className="text-gray-700">{job.description}</p>
-                  )}
+            {employment.map((job: any) => {
+              const position = getLocalizedField(job, 'position', language)
+              const company = getLocalizedField(job, 'company', language)
+              const description = getLocalizedField(job, 'description', language)
+              const location = getLocalizedField(job, 'location', language)
+
+              return (
+                <div key={job._id} className="relative pl-8">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-blue-500 rounded-full border-2 border-white" />
+                  <div className="bg-white rounded-lg shadow-md p-6">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {position}
+                    </h3>
+                    <p className="text-blue-600 font-medium mb-2">{company}</p>
+                    <p className="text-gray-500 text-sm mb-3">
+                      {formatDate(job.startDate, job.endDate)}
+                    </p>
+                    {location && (
+                      <p className="text-gray-500 text-sm mb-3">{location}</p>
+                    )}
+                    {description && (
+                      <p className="text-gray-700">{description}</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </section>
@@ -64,26 +72,32 @@ export default function ExperienceContent({ employment, education }: ExperienceC
           <p className="text-gray-600">{t('experience.noEducation')}</p>
         ) : (
           <div className="relative border-l-2 border-gray-200 ml-4 space-y-8">
-            {education.map((edu: any) => (
-              <div key={edu._id} className="relative pl-8">
-                <div className="absolute -left-2 top-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    {edu.degree}
-                  </h3>
-                  <p className="text-green-600 font-medium mb-2">{edu.school}</p>
-                  {edu.field && (
-                    <p className="text-gray-600 mb-2">{edu.field}</p>
-                  )}
-                  <p className="text-gray-500 text-sm">
-                    {formatDate(edu.startDate, edu.endDate)}
-                  </p>
-                  {edu.description && (
-                    <p className="text-gray-700 mt-3">{edu.description}</p>
-                  )}
+            {education.map((edu: any) => {
+              const degree = getLocalizedField(edu, 'degree', language)
+              const school = getLocalizedField(edu, 'school', language)
+              const description = getLocalizedField(edu, 'description', language)
+
+              return (
+                <div key={edu._id} className="relative pl-8">
+                  <div className="absolute -left-2 top-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
+                  <div className="bg-white rounded-lg shadow-md p-6">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {degree}
+                    </h3>
+                    <p className="text-green-600 font-medium mb-2">{school}</p>
+                    {edu.field && (
+                      <p className="text-gray-600 mb-2">{edu.field}</p>
+                    )}
+                    <p className="text-gray-500 text-sm">
+                      {formatDate(edu.startDate, edu.endDate)}
+                    </p>
+                    {description && (
+                      <p className="text-gray-700 mt-3">{description}</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </section>
