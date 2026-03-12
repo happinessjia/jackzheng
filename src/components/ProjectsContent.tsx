@@ -30,12 +30,12 @@ export default function ProjectsContent({ projects }: ProjectsContentProps) {
                 key={project._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col md:flex-row"
               >
-                <div className="w-full md:w-1/2 lg:w-3/5 bg-gray-100 flex items-center justify-center">
+                <div className="w-full md:w-1/2 lg:w-3/5 bg-gray-100 flex items-center justify-center p-4">
                   {project.image ? (
                     <img
-                      src={urlFor(project.image).width(1200).height(800).url()}
+                      src={urlFor(project.image).width(1200).height(1).url()}
                       alt={title}
-                      className="w-full h-auto object-contain"
+                      className="max-w-full max-h-[500px] w-auto h-auto object-contain"
                     />
                   ) : (
                     <div className="w-full h-48 md:h-full flex items-center justify-center py-12">
