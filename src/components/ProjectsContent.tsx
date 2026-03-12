@@ -28,37 +28,37 @@ export default function ProjectsContent({ projects }: ProjectsContentProps) {
             return (
               <div
                 key={project._id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col md:flex-row"
               >
-                <div className="relative bg-gray-100 flex items-center justify-center min-h-[300px]">
+                <div className="w-full md:w-1/2 lg:w-3/5 bg-gray-100 flex items-center justify-center">
                   {project.image ? (
                     <img
                       src={urlFor(project.image).width(1200).height(800).url()}
                       alt={title}
-                      className="w-full h-auto max-h-[600px] object-contain"
+                      className="w-full h-auto object-contain"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center py-16">
+                    <div className="w-full h-48 md:h-full flex items-center justify-center py-12">
                       <span className="text-gray-400">{t('projects.noImage')}</span>
                     </div>
                   )}
                 </div>
 
-                <div className="p-4">
-                  <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                <div className="w-full md:w-1/2 lg:w-2/5 p-6">
+                  <h2 className="text-xl font-semibold text-gray-900 mb-3">
                     {title}
                   </h2>
                   {description && (
-                    <div className="text-gray-600 text-sm mb-3">
+                    <div className="text-gray-600 mb-4">
                       <PortableText value={description} />
                     </div>
                   )}
                   {project.date && (
-                    <p className="text-gray-500 text-sm">{project.date}</p>
+                    <p className="text-gray-500 text-sm mb-3">{project.date}</p>
                   )}
                   {project.technologies && project.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {project.technologies.slice(0, 3).map((tech: string, i: number) => (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.slice(0, 5).map((tech: string, i: number) => (
                         <span
                           key={i}
                           className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
@@ -69,7 +69,7 @@ export default function ProjectsContent({ projects }: ProjectsContentProps) {
                     </div>
                   )}
                   {project.downloads && project.downloads.length > 0 && (
-                    <div className="mt-4">
+                    <div className="mb-4">
                       <h3 className="text-sm font-medium text-gray-700 mb-2">{t('projects.downloads') || 'Downloads'}</h3>
                       <div className="flex flex-wrap gap-2">
                         {project.downloads.map((download: any, i: number) => (
@@ -94,7 +94,7 @@ export default function ProjectsContent({ projects }: ProjectsContentProps) {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block mt-4 text-blue-600 hover:underline"
+                      className="inline-block mt-2 text-blue-600 hover:underline"
                     >
                       {t('projects.viewProject')}
                     </a>
