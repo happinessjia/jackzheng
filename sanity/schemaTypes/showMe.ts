@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { localizedString, localizedText } from './localizedTypes'
+import { localizedString, localizedRichText } from './localizedTypes'
 
 export default defineType({
   name: 'showMe',
@@ -32,7 +32,7 @@ export default defineType({
       type: 'url',
       description: 'URL to video file or embed URL',
     }),
-    ...localizedText({ name: 'description', title: 'Description' }),
+    ...localizedRichText({ name: 'description', title: 'Description' }),
     defineField({
       name: 'order',
       title: 'Display Order',

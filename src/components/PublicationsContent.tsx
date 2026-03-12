@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getLocalizedField } from '@/lib/i18n-content'
+import { PortableText } from '@portabletext/react'
 
 interface PublicationsContentProps {
   publications: any[]
@@ -41,7 +42,9 @@ export default function PublicationsContent({ publications }: PublicationsConten
                   </p>
                 )}
                 {description && (
-                  <p className="text-gray-700 mb-4">{description}</p>
+                  <div className="text-gray-700 mb-4">
+                    <PortableText value={description} />
+                  </div>
                 )}
                 {pub.link && (
                   <a

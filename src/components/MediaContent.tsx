@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getLocalizedField } from '@/lib/i18n-content'
+import { PortableText } from '@portabletext/react'
 
 interface MediaContentProps {
   media: any[]
@@ -37,7 +38,9 @@ export default function MediaContent({ media }: MediaContentProps) {
                   </p>
                 )}
                 {description && (
-                  <p className="text-gray-700 mb-4">{description}</p>
+                  <div className="text-gray-700 mb-4">
+                    <PortableText value={description} />
+                  </div>
                 )}
                 {item.link && (
                   <a

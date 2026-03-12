@@ -3,6 +3,7 @@
 import { useLanguage } from '@/contexts/LanguageContext'
 import { urlFor } from '@/sanity/lib/client'
 import { getLocalizedField } from '@/lib/i18n-content'
+import { PortableText } from '@portabletext/react'
 
 interface ShowMeContentProps {
   items: any[]
@@ -58,7 +59,9 @@ export default function ShowMeContent({ items }: ShowMeContentProps) {
                     {title || t('showMe.untitled')}
                   </h3>
                   {description && (
-                    <p className="text-gray-600 text-sm">{description}</p>
+                    <div className="text-gray-600 text-sm">
+                      <PortableText value={description} />
+                    </div>
                   )}
                 </div>
               </div>

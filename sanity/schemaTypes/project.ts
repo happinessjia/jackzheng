@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { localizedString, localizedText } from './localizedTypes'
+import { localizedString, localizedRichText } from './localizedTypes'
 
 export default defineType({
   name: 'project',
@@ -7,7 +7,7 @@ export default defineType({
   type: 'document',
   fields: [
     ...localizedString({ name: 'title', title: 'Title' }),
-    ...localizedText({ name: 'description', title: 'Description' }),
+    ...localizedRichText({ name: 'description', title: 'Description' }),
     defineField({
       name: 'image',
       title: 'Cover Image',

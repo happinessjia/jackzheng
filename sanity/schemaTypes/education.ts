@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { localizedString, localizedText } from './localizedTypes'
+import { localizedString, localizedRichText } from './localizedTypes'
 
 export default defineType({
   name: 'education',
@@ -23,6 +23,6 @@ export default defineType({
       title: 'End Date',
       type: 'string',
     }),
-    ...localizedText({ name: 'description', title: 'Description' }),
+    ...localizedRichText({ name: 'description', title: 'Description' }),
   ],
 })

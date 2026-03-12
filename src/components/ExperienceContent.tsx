@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getLocalizedField } from '@/lib/i18n-content'
+import { PortableText } from '@portabletext/react'
 
 interface ExperienceContentProps {
   employment: any[]
@@ -54,7 +55,9 @@ export default function ExperienceContent({ employment, education }: ExperienceC
                       <p className="text-gray-500 text-sm mb-3">{location}</p>
                     )}
                     {description && (
-                      <p className="text-gray-700">{description}</p>
+                      <div className="text-gray-700">
+                        <PortableText value={description} />
+                      </div>
                     )}
                   </div>
                 </div>
@@ -92,7 +95,9 @@ export default function ExperienceContent({ employment, education }: ExperienceC
                       {formatDate(edu.startDate, edu.endDate)}
                     </p>
                     {description && (
-                      <p className="text-gray-700 mt-3">{description}</p>
+                      <div className="text-gray-700 mt-3">
+                        <PortableText value={description} />
+                      </div>
                     )}
                   </div>
                 </div>

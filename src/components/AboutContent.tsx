@@ -3,6 +3,7 @@
 import { useLanguage } from '@/contexts/LanguageContext'
 import { urlFor } from '@/sanity/lib/client'
 import { getLocalizedField } from '@/lib/i18n-content'
+import { PortableText } from '@portabletext/react'
 
 interface AboutContentProps {
   about: any
@@ -70,11 +71,7 @@ export default function AboutContent({ about }: AboutContentProps) {
           <div className="mt-8">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">{t('about.biography')}</h3>
             <div className="prose max-w-none text-gray-700">
-              {bio.map((block: any, i: number) => (
-                <p key={i} className="mb-4">
-                  {block.children?.map((child: any) => child.text).join('')}
-                </p>
-              ))}
+              <PortableText value={bio} />
             </div>
           </div>
         )}

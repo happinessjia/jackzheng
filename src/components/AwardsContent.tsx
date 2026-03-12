@@ -2,6 +2,7 @@
 
 import { useLanguage } from '@/contexts/LanguageContext'
 import { getLocalizedField } from '@/lib/i18n-content'
+import { PortableText } from '@portabletext/react'
 
 interface AwardsContentProps {
   awards: any[]
@@ -50,7 +51,9 @@ export default function AwardsContent({ awards }: AwardsContentProps) {
                   </p>
                 )}
                 {description && (
-                  <p className="text-gray-700">{description}</p>
+                  <div className="text-gray-700">
+                    <PortableText value={description} />
+                  </div>
                 )}
               </div>
             )

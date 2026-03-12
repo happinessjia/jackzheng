@@ -16,7 +16,7 @@ export function getLocalizedField(
   data: Record<string, any> | null | undefined,
   fieldName: string,
   language: Language
-): string {
+): any {
   if (!data) return ''
 
   const zhField = `${fieldName}_zh`

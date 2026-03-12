@@ -3,6 +3,7 @@
 import { useLanguage } from '@/contexts/LanguageContext'
 import { urlFor } from '@/sanity/lib/client'
 import { getLocalizedField } from '@/lib/i18n-content'
+import { PortableText } from '@portabletext/react'
 
 interface ProjectsContentProps {
   projects: any[]
@@ -47,9 +48,9 @@ export default function ProjectsContent({ projects }: ProjectsContentProps) {
                     {title}
                   </h2>
                   {description && (
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-                      {description}
-                    </p>
+                    <div className="text-gray-600 text-sm mb-3 line-clamp-2">
+                      <PortableText value={description} />
+                    </div>
                   )}
                   {project.date && (
                     <p className="text-gray-500 text-sm">{project.date}</p>
