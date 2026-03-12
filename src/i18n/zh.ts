@@ -56,6 +56,7 @@ const zh = {
   'projects.noAvailable': '暂无项目。',
   'projects.noImage': '无图片',
   'projects.viewProject': '查看项目 →',
+  'projects.downloads': '下载',
 
   // Experience page
   'experience.title': '经历',

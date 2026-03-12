@@ -21,6 +21,22 @@ export function urlFor(source: SanityImageSource) {
   return builder.image(source)
 }
 
+// Get file URL from Sanity file object
+export function fileUrl(source: any): string {
+  if (!source || !source.asset) {
+    return ''
+  }
+  const ref = source.asset._ref
+  if (!ref) {
+    return ''
+  }
+  // Extract file ID from reference (format: file-{id}-{hash})
+  const fileId = ref.replace('file-', '').split('-').slice(0, 2).join('-')
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${fileId}`
+}
+
 // Helper function to safely fetch data
 async function safeFetch<T>(query: string, params?: any): Promise<T> {
   if (!isSanityConfigured()) {

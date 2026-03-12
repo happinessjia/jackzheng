@@ -56,6 +56,7 @@ const en = {
   'projects.noAvailable': 'No projects available.',
   'projects.noImage': 'No image',
   'projects.viewProject': 'View Project →',
+  'projects.downloads': 'Downloads',
 
   // Experience page
   'experience.title': 'Experience',
