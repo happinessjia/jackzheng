@@ -25,13 +25,15 @@ type SanityImageSource = {
   }
 }
 
-export function urlFor(source: SanityImageSource) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function urlFor(source: SanityImageSource): any {
   if (!source || !source.asset) {
     return {
-      width: () => ({ height: () => ({ url: () => '' }) }),
+      width: () => ({ height: () => ({ url: () => '' }), url: () => '' }),
     }
   }
-  return builder.image(source)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return builder.image(source) as any
 }
 
 export function isSanityConfigured() {
