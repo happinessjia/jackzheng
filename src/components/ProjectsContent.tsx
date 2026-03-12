@@ -20,7 +20,7 @@ export default function ProjectsContent({ projects }: ProjectsContentProps) {
       {projects.length === 0 ? (
         <p className="text-gray-600">{t('projects.noAvailable')}</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           {projects.map((project: any) => {
             const title = getLocalizedField(project, 'title', language)
             const description = getLocalizedField(project, 'description', language)
@@ -30,15 +30,15 @@ export default function ProjectsContent({ projects }: ProjectsContentProps) {
                 key={project._id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="relative bg-gray-100 flex items-center justify-center min-h-[200px]">
+                <div className="relative bg-gray-100 flex items-center justify-center min-h-[300px]">
                   {project.image ? (
                     <img
-                      src={urlFor(project.image).width(600).height(400).url()}
+                      src={urlFor(project.image).width(1200).height(800).url()}
                       alt={title}
-                      className="w-full h-auto max-h-[400px] object-contain"
+                      className="w-full h-auto max-h-[600px] object-contain"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center py-12">
+                    <div className="w-full h-full flex items-center justify-center py-16">
                       <span className="text-gray-400">{t('projects.noImage')}</span>
                     </div>
                   )}
