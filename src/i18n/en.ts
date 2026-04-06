@@ -1,5 +1,6 @@
 const en = {
   // Navigation
+  'nav.logo': "Zheng Jiajia's Portfolio",
   'nav.home': 'Home',
   'nav.showMe': 'Show Me',
   'nav.about': 'About',
@@ -12,14 +13,16 @@ const en = {
   // Home page
   'home.welcome': 'Welcome to My Portfolio',
   'home.subtitle': 'Personal Website & Portfolio',
-  'home.showMe.link': 'Photos and videos showcase',
-  'home.about.link': 'Learn more about me',
-  'home.projects.link': 'View my work and downloads',
-  'home.publications.link': 'Research and publications',
-  'home.experience.link': 'Work and education history',
-  'home.awards.link': 'Technical skills and expertise',
   'home.featured': 'Featured',
-  'home.featured.description': 'Explore my portfolio to see my latest work, publications, projects, and more.',
+  'home.featured.empty': 'No featured content yet. Check back soon!',
+  'home.featured.projects': 'Projects',
+  'home.featured.showMe': 'Show Me',
+  'home.featured.publications': 'Publications',
+  'home.featured.mediaReports': 'Media Reports',
+  'home.featured.awards': 'Awards',
+  'home.viewProject': 'View Project →',
+  'home.viewPublication': 'View Publication →',
+  'home.viewMedia': 'Read More →',
 
   // About page
   'about.title': 'About Me',

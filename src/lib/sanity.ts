@@ -12,13 +12,15 @@ type SanityImageSource = {
   }
 }
 
-export function urlFor(source: SanityImageSource) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function urlFor(source: SanityImageSource): any {
   if (!source || !source.asset) {
     return {
-      width: () => ({ height: () => ({ url: () => '' }) }),
+      width: () => ({ height: () => ({ url: () => '' }), url: () => '' }),
     }
   }
-  return builder.image(source)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return builder.image(source) as any
 }
 
 // Get file URL from Sanity file object
@@ -90,4 +92,23 @@ export async function getAwards() {
 
 export async function getSkills() {
   return safeFetch<any[]>(`*[_type == "skill"]`)
+}
+
+// Get all favorite items across all content types
+export async function getFeatured() {
+  const [projects, showMeItems, publications, mediaReports, awards] = await Promise.all([
+    safeFetch<any[]>(`*[_type == "project" && favorite == true]`),
+    safeFetch<any[]>(`*[_type == "showMe" && favorite == true]`),
+    safeFetch<any[]>(`*[_type == "publication" && favorite == true]`),
+    safeFetch<any[]>(`*[_type == "mediaReport" && favorite == true]`),
+    safeFetch<any[]>(`*[_type == "award" && favorite == true]`),
+  ])
+
+  return {
+    projects,
+    showMeItems,
+    publications,
+    mediaReports,
+    awards,
+  }
 }

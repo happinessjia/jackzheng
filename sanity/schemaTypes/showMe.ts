@@ -38,5 +38,11 @@ export default defineType({
       title: 'Display Order',
       type: 'number',
     }),
+    defineField({
+      name: 'favorite',
+      title: 'Favorite',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
 })

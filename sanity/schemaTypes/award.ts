@@ -14,5 +14,11 @@ export default defineType({
       type: 'date',
     }),
     ...localizedRichText({ name: 'description', title: 'Description' }),
+    defineField({
+      name: 'favorite',
+      title: 'Favorite',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
 })

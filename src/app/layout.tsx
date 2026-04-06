@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
+  title: "Zheng Jiajia's Portfolio",
   description: "Personal portfolio website",
 };
 
@@ -46,7 +46,7 @@ function Footer() {
   return (
     <footer className="bg-white border-t border-gray-200 py-6 mt-12">
       <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} My Portfolio. All rights reserved.
+        © {new Date().getFullYear()} Zheng Jiajia&apos;s Portfolio. All rights reserved.
       </div>
     </footer>
   )

@@ -1,5 +1,6 @@
 const zh = {
   // Navigation
+  'nav.logo': '郑佳佳的作品集',
   'nav.home': '首页',
   'nav.showMe': '展示',
   'nav.about': '关于',
@@ -10,16 +11,18 @@ const zh = {
   'nav.awards': '获奖',
 
   // Home page
-  'home.welcome': '欢迎访问我的个人网站',
+  'home.welcome': '欢迎访问郑佳佳的个人网站',
   'home.subtitle': '个人网站与作品集',
-  'home.showMe.link': '照片和视频展示',
-  'home.about.link': '了解更多关于我',
-  'home.projects.link': '查看我的作品和下载',
-  'home.publications.link': '研究与出版物',
-  'home.experience.link': '工作与教育经历',
-  'home.awards.link': '技能与专业知识',
   'home.featured': '精选',
-  'home.featured.description': '浏览我的作品集，了解我的最新工作、出版物、项目等。',
+  'home.featured.empty': '暂无精选内容，敬请期待！',
+  'home.featured.projects': '项目',
+  'home.featured.showMe': '展示',
+  'home.featured.publications': '发表成果',
+  'home.featured.mediaReports': '媒体报道',
+  'home.featured.awards': '获奖',
+  'home.viewProject': '查看项目 →',
+  'home.viewPublication': '查看出版物 →',
+  'home.viewMedia': '阅读更多 →',
 
   // About page
   'about.title': '关于我',
