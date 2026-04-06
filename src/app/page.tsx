@@ -14,7 +14,7 @@ type FeaturedData = {
   awards: any[]
 }
 
-function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: string) => string }) {
+function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any) => string }) {
   const hasImage = item.image?.asset || (item.image && typeof item.image === 'string')
 
   const getLink = () => {
@@ -104,7 +104,7 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: str
   )
 }
 
-function FeaturedSection({ title, items, type, t }: { title: string; items: any[]; type: string; t: (key: string) => string }) {
+function FeaturedSection({ title, items, type, t }: { title: string; items: any[]; type: string; t: (key: any) => string }) {
   if (!items || items.length === 0) return null
 
   return (
