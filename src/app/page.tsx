@@ -19,7 +19,9 @@ type FeaturedData = {
 
 function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any) => string }) {
   const { language } = useLanguage()
-  const hasImage = item.image?.asset || (item.image && typeof item.image === 'string')
+  // about 类型用 avatar 字段，其他类型用 image 字段
+  const imageObj = type === 'about' ? item.avatar : item.image
+  const hasImage = imageObj?.asset || (imageObj && typeof imageObj === 'string')
 
   const getLink = () => {
     switch (type) {
@@ -110,15 +112,15 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
     >
       {hasImage && (
         <div className="relative h-48 w-full overflow-hidden">
-          {typeof item.image === 'string' ? (
+          {typeof imageObj === 'string' ? (
             <img
-              src={item.image}
+              src={imageObj}
               alt={getLocalizedTitle(item)}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           ) : (
             <Image
-              src={urlFor(item.image).width(400).height(300).url()}
+              src={urlFor(imageObj).width(400).height(300).url()}
               alt={getLocalizedTitle(item)}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -127,16 +129,6 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
         </div>
       )}
       <div className="p-5">
-        <span className="inline-block px-3 py-1 text-xs font-medium text-blue-600 bg-blue-50 rounded-full mb-3">
-          {type === 'project' && t('home.featured.projects')}
-          {type === 'showMe' && t('home.featured.showMe')}
-          {type === 'publication' && t('home.featured.publications')}
-          {type === 'mediaReport' && t('home.featured.mediaReports')}
-          {type === 'award' && t('home.featured.awards')}
-          {type === 'about' && t('home.featured.about')}
-          {type === 'employment' && t('home.featured.employment')}
-          {type === 'education' && t('home.featured.education')}
-        </span>
         <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
           {getLocalizedTitle(item)}
         </h3>
@@ -150,23 +142,6 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
         )}
       </div>
     </Link>
-  )
-}
-
-function FeaturedSection({ title, items, type, t }: { title: string; items: any[]; type: string; t: (key: any) => string }) {
-  if (!items || items.length === 0) return null
-
-  return (
-    <section className="mb-10">
-      <h3 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b-2 border-blue-500 inline-block">
-        {title}
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {items.map((item) => (
-          <FeaturedCard key={item._id} item={item} type={type} t={t} />
-        ))}
-      </div>
-    </section>
   )
 }
 
@@ -189,93 +164,33 @@ export default function Home() {
     fetchFeatured()
   }, [])
 
-  const hasAnyFeatured = featured && (
-    (featured.projects?.length ?? 0) > 0 ||
-    (featured.showMeItems?.length ?? 0) > 0 ||
-    (featured.publications?.length ?? 0) > 0 ||
-    (featured.mediaReports?.length ?? 0) > 0 ||
-    (featured.awards?.length ?? 0) > 0 ||
-    (featured.about?.length ?? 0) > 0 ||
-    (featured.employment?.length ?? 0) > 0 ||
-    (featured.education?.length ?? 0) > 0
-  )
+  const allFeatured = featured ? [
+    ...featured.about.map((item: any) => ({ item, type: 'about' })),
+    ...featured.projects.map((item: any) => ({ item, type: 'project' })),
+    ...featured.showMeItems.map((item: any) => ({ item, type: 'showMe' })),
+    ...featured.publications.map((item: any) => ({ item, type: 'publication' })),
+    ...featured.mediaReports.map((item: any) => ({ item, type: 'mediaReport' })),
+    ...featured.awards.map((item: any) => ({ item, type: 'award' })),
+    ...featured.employment.map((item: any) => ({ item, type: 'employment' })),
+    ...featured.education.map((item: any) => ({ item, type: 'education' })),
+  ] : []
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Featured Content */}
       {loading ? (
         <div className="text-center py-12">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
         </div>
-      ) : hasAnyFeatured ? (
+      ) : allFeatured.length > 0 ? (
         <div>
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             {t('home.featured')}
           </h2>
-          {featured?.projects?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.projects')}
-              items={featured.projects}
-              type="project"
-              t={t}
-            />
-          )}
-          {featured?.showMeItems?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.showMe')}
-              items={featured.showMeItems}
-              type="showMe"
-              t={t}
-            />
-          )}
-          {featured?.publications?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.publications')}
-              items={featured.publications}
-              type="publication"
-              t={t}
-            />
-          )}
-          {featured?.mediaReports?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.mediaReports')}
-              items={featured.mediaReports}
-              type="mediaReport"
-              t={t}
-            />
-          )}
-          {featured?.awards?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.awards')}
-              items={featured.awards}
-              type="award"
-              t={t}
-            />
-          )}
-          {featured?.about?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.about')}
-              items={featured.about}
-              type="about"
-              t={t}
-            />
-          )}
-          {featured?.employment?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.employment')}
-              items={featured.employment}
-              type="employment"
-              t={t}
-            />
-          )}
-          {featured?.education?.length > 0 && (
-            <FeaturedSection
-              title={t('home.featured.education')}
-              items={featured.education}
-              type="education"
-              t={t}
-            />
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {allFeatured.map(({ item, type }) => (
+              <FeaturedCard key={item._id} item={item} type={type} t={t} />
+            ))}
+          </div>
         </div>
       ) : (
         <div className="text-center py-16 bg-white rounded-xl shadow-md">

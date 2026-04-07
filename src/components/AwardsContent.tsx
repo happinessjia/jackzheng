@@ -22,9 +22,6 @@ export default function AwardsContent({ awards }: AwardsContentProps) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-12">{t('awards.title')}</h1>
-
-      {/* Awards Section */}
       {awards.length === 0 ? (
         <p className="text-gray-600">{t('awards.noAwards')}</p>
       ) : (

@@ -15,7 +15,6 @@ export default function AboutContent({ about }: AboutContentProps) {
   if (!about) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">{t('about.title')}</h1>
         <p className="text-gray-600">{t('about.noInfo')}</p>
       </div>
     )
@@ -28,8 +27,6 @@ export default function AboutContent({ about }: AboutContentProps) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">{t('about.title')}</h1>
-
       <div className="bg-white rounded-lg shadow-md p-8">
         <div className="flex flex-col md:flex-row gap-8">
           {about.avatar && (
