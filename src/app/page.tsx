@@ -57,13 +57,51 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
   }
 
   const getLocalizedTitle = (item: any) => {
-    return item.title?.zh || item.title?.en || item.title || ''
+    // Check different field names based on content type
+    if (item.name?.zh || item.name?.en) {
+      return item.name?.zh || item.name?.en || ''
+    }
+    if (item.title?.zh || item.title?.en) {
+      return item.title?.zh || item.title?.en || ''
+    }
+    if (item.school?.zh || item.school?.en) {
+      return item.school?.zh || item.school?.en || ''
+    }
+    if (item.company?.zh || item.company?.en) {
+      return item.company?.zh || item.company?.en || ''
+    }
+    return ''
   }
 
   const getLocalizedDescription = (item: any) => {
-    if (item.description?.zh) return item.description.zh
-    if (item.description?.en) return item.description.en
-    return item.description || ''
+    // Handle rich text arrays (Sanity stores localized rich text as arrays)
+    const getTextFromRichText = (rt: any) => {
+      if (!rt) return ''
+      if (typeof rt === 'string') return rt
+      if (Array.isArray(rt)) {
+        return rt.map((block: any) => {
+          if (block.children) {
+            return block.children.map((child: any) => child.text || '').join('')
+          }
+          return ''
+        }).join(' ')
+      }
+      return ''
+    }
+
+    if (item.bio?.zh || item.bio?.en) {
+      return getTextFromRichText(item.bio?.zh || item.bio?.en)
+    }
+    if (item.description?.zh || item.description?.en) {
+      return getTextFromRichText(item.description?.zh || item.description?.en)
+    }
+    if (item.bio_zh || item.bio_en) {
+      return getTextFromRichText(item.bio_zh || item.bio_en)
+    }
+    if (item.description_zh || item.description_en) {
+      return getTextFromRichText(item.description_zh || item.description_en)
+    }
+    return ''
   }
 
   return (
