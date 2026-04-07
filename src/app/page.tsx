@@ -18,6 +18,7 @@ type FeaturedData = {
 }
 
 function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any) => string }) {
+  const { language } = useLanguage()
   const hasImage = item.image?.asset || (item.image && typeof item.image === 'string')
 
   const getLink = () => {
@@ -57,18 +58,20 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
   }
 
   const getLocalizedTitle = (item: any) => {
-    // Check different field names based on content type
-    if (item.name?.zh || item.name?.en) {
-      return item.name?.zh || item.name?.en || ''
+    // Sanity localizedString() creates flat fields: name_zh, name_en, title_zh, etc.
+    const primary = `_${language}`
+    const fallback = language === 'zh' ? '_en' : '_zh'
+    if (item[`name${primary}`] || item[`name${fallback}`]) {
+      return item[`name${primary}`] || item[`name${fallback}`] || ''
     }
-    if (item.title?.zh || item.title?.en) {
-      return item.title?.zh || item.title?.en || ''
+    if (item[`title${primary}`] || item[`title${fallback}`]) {
+      return item[`title${primary}`] || item[`title${fallback}`] || ''
     }
-    if (item.school?.zh || item.school?.en) {
-      return item.school?.zh || item.school?.en || ''
+    if (item[`school${primary}`] || item[`school${fallback}`]) {
+      return item[`school${primary}`] || item[`school${fallback}`] || ''
     }
-    if (item.company?.zh || item.company?.en) {
-      return item.company?.zh || item.company?.en || ''
+    if (item[`company${primary}`] || item[`company${fallback}`]) {
+      return item[`company${primary}`] || item[`company${fallback}`] || ''
     }
     return ''
   }
@@ -89,17 +92,13 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
       return ''
     }
 
-    if (item.bio?.zh || item.bio?.en) {
-      return getTextFromRichText(item.bio?.zh || item.bio?.en)
+    const primary = language
+    const fallback = language === 'zh' ? 'en' : 'zh'
+    if (item[`bio_${primary}`] || item[`bio_${fallback}`]) {
+      return getTextFromRichText(item[`bio_${primary}`] || item[`bio_${fallback}`])
     }
-    if (item.description?.zh || item.description?.en) {
-      return getTextFromRichText(item.description?.zh || item.description?.en)
-    }
-    if (item.bio_zh || item.bio_en) {
-      return getTextFromRichText(item.bio_zh || item.bio_en)
-    }
-    if (item.description_zh || item.description_en) {
-      return getTextFromRichText(item.description_zh || item.description_en)
+    if (item[`description_${primary}`] || item[`description_${fallback}`]) {
+      return getTextFromRichText(item[`description_${primary}`] || item[`description_${fallback}`])
     }
     return ''
   }
