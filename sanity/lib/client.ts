@@ -5,9 +5,6 @@ export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-proj
 export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 export const apiVersion = '2024-01-01'
 
-// Check if Sanity is properly configured
-const isConfigured = projectId !== 'your-project-id' && projectId.length > 0
-
 export const client = createClient({
   projectId,
   dataset,
@@ -37,5 +34,7 @@ export function urlFor(source: SanityImageSource): any {
 }
 
 export function isSanityConfigured() {
-  return isConfigured
+  // Check at function call time, not module load time
+  const currentProjectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id'
+  return currentProjectId !== 'your-project-id' && currentProjectId.length > 0
 }
