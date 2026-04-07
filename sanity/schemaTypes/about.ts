@@ -37,5 +37,11 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: 'favorite',
+      title: 'Favorite',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
 })

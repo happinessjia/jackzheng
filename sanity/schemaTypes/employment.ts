@@ -21,5 +21,11 @@ export default defineType({
     }),
     ...localizedRichText({ name: 'description', title: 'Description' }),
     ...localizedString({ name: 'location', title: 'Location' }),
+    defineField({
+      name: 'favorite',
+      title: 'Favorite',
+      type: 'boolean',
+      initialValue: false,
+    }),
   ],
 })

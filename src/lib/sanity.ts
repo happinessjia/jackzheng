@@ -96,12 +96,15 @@ export async function getSkills() {
 
 // Get all favorite items across all content types
 export async function getFeatured() {
-  const [projects, showMeItems, publications, mediaReports, awards] = await Promise.all([
+  const [projects, showMeItems, publications, mediaReports, awards, about, employment, education] = await Promise.all([
     safeFetch<any[]>(`*[_type == "project" && favorite == true]`),
     safeFetch<any[]>(`*[_type == "showMe" && favorite == true]`),
     safeFetch<any[]>(`*[_type == "publication" && favorite == true]`),
     safeFetch<any[]>(`*[_type == "mediaReport" && favorite == true]`),
     safeFetch<any[]>(`*[_type == "award" && favorite == true]`),
+    safeFetch<any[]>(`*[_type == "about" && favorite == true]`),
+    safeFetch<any[]>(`*[_type == "employment" && favorite == true]`),
+    safeFetch<any[]>(`*[_type == "education" && favorite == true]`),
   ])
 
   return {
@@ -110,5 +113,8 @@ export async function getFeatured() {
     publications,
     mediaReports,
     awards,
+    about,
+    employment,
+    education,
   }
 }

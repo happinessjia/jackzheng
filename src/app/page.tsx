@@ -12,6 +12,9 @@ type FeaturedData = {
   publications: any[]
   mediaReports: any[]
   awards: any[]
+  about: any[]
+  employment: any[]
+  education: any[]
 }
 
 function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any) => string }) {
@@ -29,6 +32,12 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
         return item.link || '#'
       case 'award':
         return '/awards'
+      case 'about':
+        return '/about'
+      case 'employment':
+        return '/experience'
+      case 'education':
+        return '/experience'
       default:
         return '#'
     }
@@ -87,6 +96,9 @@ function FeaturedCard({ item, type, t }: { item: any; type: string; t: (key: any
           {type === 'publication' && t('home.featured.publications')}
           {type === 'mediaReport' && t('home.featured.mediaReports')}
           {type === 'award' && t('home.featured.awards')}
+          {type === 'about' && t('home.featured.about')}
+          {type === 'employment' && t('home.featured.employment')}
+          {type === 'education' && t('home.featured.education')}
         </span>
         <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
           {getLocalizedTitle(item)}
@@ -145,7 +157,10 @@ export default function Home() {
     (featured.showMeItems?.length ?? 0) > 0 ||
     (featured.publications?.length ?? 0) > 0 ||
     (featured.mediaReports?.length ?? 0) > 0 ||
-    (featured.awards?.length ?? 0) > 0
+    (featured.awards?.length ?? 0) > 0 ||
+    (featured.about?.length ?? 0) > 0 ||
+    (featured.employment?.length ?? 0) > 0 ||
+    (featured.education?.length ?? 0) > 0
   )
 
   return (
@@ -197,6 +212,30 @@ export default function Home() {
               title={t('home.featured.awards')}
               items={featured.awards}
               type="award"
+              t={t}
+            />
+          )}
+          {featured?.about?.length > 0 && (
+            <FeaturedSection
+              title={t('home.featured.about')}
+              items={featured.about}
+              type="about"
+              t={t}
+            />
+          )}
+          {featured?.employment?.length > 0 && (
+            <FeaturedSection
+              title={t('home.featured.employment')}
+              items={featured.employment}
+              type="employment"
+              t={t}
+            />
+          )}
+          {featured?.education?.length > 0 && (
+            <FeaturedSection
+              title={t('home.featured.education')}
+              items={featured.education}
+              type="education"
               t={t}
             />
           )}
