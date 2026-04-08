@@ -7,15 +7,18 @@ export default function VisitCounter() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('https://api.countapi.xyz/hit/wubennao.com/visits')
-      .then(res => res.json())
-      .then(data => {
-        setCount(data.value)
+    async function fetchCount() {
+      try {
+        const res = await fetch('/api/visits')
+        const data = await res.json()
+        setCount(data.count)
+      } catch (err) {
+        console.error('Visits error:', err)
+      } finally {
         setLoading(false)
-      })
-      .catch(() => {
-        setLoading(false)
-      })
+      }
+    }
+    fetchCount()
   }, [])
 
   return (
